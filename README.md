@@ -1,2 +1,2 @@
 # sunny-strides
-Fair weather running location finder
+Fair weather running location finder tool in SF. 
