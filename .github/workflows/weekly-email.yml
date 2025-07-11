@@ -1,4 +1,4 @@
-name: Weekly emails for identifying good running weather
+name: Weekly emails
 
 on: 
   schedule: 
@@ -12,6 +12,11 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
 
       - name: Install poetry
         uses: snok/install-poetry@v1
