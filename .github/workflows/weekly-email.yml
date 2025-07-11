@@ -42,4 +42,4 @@ jobs:
           SENDER: ${{ secrets.SENDER }}
           SMTP_GMAIL_PASS: ${{ secrets.SMTP_GMAIL_PASS }}
         run: |
-          poetry run python processor.py
+          poetry run python sunnystrides/processor.py
