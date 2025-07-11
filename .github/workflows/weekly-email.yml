@@ -2,7 +2,7 @@ name: Weekly emails for identifying good running weather
 
 on: 
   schedule: 
-    - cron: "0 14 * * 0"
+    - cron: '0 14 * * 0'
   workflow_dispatch: 
 
 jobs:
