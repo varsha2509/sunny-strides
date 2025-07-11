@@ -1,7 +1,7 @@
 name: Weekly emails for identifying good running weather
 
 on: 
-  scheule: 
+  schedule: 
     - cron: '0 14 ** 0'
   workflow_dispatch: 
 
@@ -9,33 +9,32 @@ jobs:
   send-email:
     runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-  steos:
-    - name: Checkout repo
-      uses: actions/checkout@v4
+      - name: Install poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 2.1.0
+          virtualenvs-create: true
+          virtualenvs-in-project: true
 
-    - name: Install poetry
-      uses: snok/install-poetry@v1
-      with:
-        version: 2.1.0
-        virtualenvs-create: true
-        virtualenvs-in-project: true
+      - name: Cache virtualenv
+        uses: actions/cache@v4
+        with:
+          path: ./.venv
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
 
-    - name: Cache virtualenv
-      uses: actions/cache@v4
-      with:
-        path: ./.venv
-        key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-poetry-
+      - name: Install dependencies
+        run: poetry install --no-interaction --no-root
 
-    - name: Install dependencies
-      run: poetry install --no-interaction --no-root
-
-    - name: Execute weekly job
-        env:
-          RECEIVER: ${{ secrets.RECEIVER }}
-          SENDER: ${{ secrets.SENDER }}
-          SMTP_GMAIL_PASS: ${{ secrets.SMTP_GMAIL_PASS }}
-        run: |
-          poetry run python processor.py
+      - name: Execute weekly job
+          env:
+            RECEIVER: ${{ secrets.RECEIVER }}
+            SENDER: ${{ secrets.SENDER }}
+            SMTP_GMAIL_PASS: ${{ secrets.SMTP_GMAIL_PASS }}
+          run: |
+            poetry run python processor.py
