@@ -32,9 +32,9 @@ jobs:
         run: poetry install --no-interaction --no-root
 
       - name: Execute weekly job
-          env:
-            RECEIVER: ${{ secrets.RECEIVER }}
-            SENDER: ${{ secrets.SENDER }}
-            SMTP_GMAIL_PASS: ${{ secrets.SMTP_GMAIL_PASS }}
-          run: |
-            poetry run python processor.py
+        env:
+          RECEIVER: ${{ secrets.RECEIVER }}
+          SENDER: ${{ secrets.SENDER }}
+          SMTP_GMAIL_PASS: ${{ secrets.SMTP_GMAIL_PASS }}
+        run: |
+          poetry run python processor.py
