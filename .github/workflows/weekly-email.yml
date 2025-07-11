@@ -41,5 +41,6 @@ jobs:
           RECEIVER: ${{ secrets.RECEIVER }}
           SENDER: ${{ secrets.SENDER }}
           SMTP_GMAIL_PASS: ${{ secrets.SMTP_GMAIL_PASS }}
+          PYTHONPATH: ./src
         run: |
-          poetry run python src/sunnystrides/processor.py  
+          poetry run python -m sunnystrides.processor
