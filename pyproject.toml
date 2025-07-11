@@ -1,18 +1,29 @@
-[project]
+[tool.poetry]
 name = "sunnystrides"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Varsha Gopalakrishnan",email = "varsha.gopalakrishnan@gmail.com"}
-]
 readme = "README.md"
-requires-python = ">=3.13"
-dependencies = [
-    "pandas (>=2.2.3,<3.0.0)",
-    "requests (>=2.32.3,<3.0.0)"
+packages = [
+    { include = "sunnystrides", from = "src" }
 ]
 
+[tool.poetry.dependencies]
+python = "^3.13"
+pandas = "^2.2.3"
+requests = "^2.32.3"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "*"
+black = "*"
+pandas-stubs = "*"
+types-requests = "*"
+isort = "*"
+
+
+[tool.poetry.scripts]
+typecheck = "scripts:typecheck"
+check_imports = "scripts:check_imports"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
